@@ -10,7 +10,7 @@ public class Main {
         FileIO io = new FileIO();
 
     StartMenu.displayLogin(io);
-    HoveMenu.displayMainMenu();
+    HoveMenu.displayMainMenu(io);
 
 
 

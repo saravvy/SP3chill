@@ -4,17 +4,18 @@ import java.util.ArrayList;
 
 
 public class FilmList {
+    private ArrayList<Film> film = new ArrayList<>();
 
     public void addFilm(FileIO io) {
-        ArrayList<Film> film = new ArrayList<>();
+
         ArrayList<String> filmData = io.readData("data/film.csv");
         if (!filmData.isEmpty()) {
             for (String s : filmData) {
                 String[] values = s.split(";");//
                 String name = values[0];
-                int year = Integer.parseInt(values[1]);
+                String year =  values[1];
                 String genre = values[2];
-                int rating = Integer.parseInt(values[3]);
+                String rating =  values[3];
 
 
                 film.add(new Film(name, year, genre, rating));
@@ -24,7 +25,10 @@ public class FilmList {
 
         }
     }
+            public ArrayList<Film> getFilms() {
+                return film;
 
+            }
 
 }
 

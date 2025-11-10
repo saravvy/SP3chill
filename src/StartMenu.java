@@ -39,27 +39,26 @@ public class StartMenu {
                                     String[] data = s.split(";");
                                     String storedUsername = data[0];
                                     String storedPassword = data[1];
-                                if (storedUsername.equals(username) && storedPassword.equals(password)) {
-                                    System.out.println("User logged in");
-                                    login = false;
+
+                                    if (storedUsername.equals(username) && storedPassword.equals(password)) {
+                                        System.out.println("User logged in");
+                                        login = false;
 
 
-                                } else if (!storedUsername.equals(username) && !storedPassword.equals(password)) {
-                                    System.out.println("Wrong username or password. Try again.");
-                                    login = true;
+                                    } else if (!storedUsername.equals(username) && !storedPassword.equals(password)) {
+                                        System.out.println("Wrong username or password. Try again.");
 
+
+                                    }
                                 }
 
-                        }  } } catch (NoSuchElementException e) {
-                            System.out.println("No users found. Please sign up first.");
-                            choice = "2";
-                        }
-
-
-
+                                }
+                            } catch(Exception e){
+                                System.out.println("No users found. Please sign up first.");
 
                             }
 
+                    }
 
                     break;
 
