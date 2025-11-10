@@ -14,47 +14,56 @@ public class StartMenu {
         System.out.println("2. Sign up");
 
         Scanner scan = new Scanner(System.in);
-        int choice = scan.nextInt();
-        scan.nextLine();
+        String choice = scan.nextLine();
         boolean login = true;
 
-        while (login) {
             switch (choice) {
 
-                case 1:
-                    System.out.println("Log in");
+                case "1":
+                    while (login) {
+                        System.out.println("Log in");
 
 
-                    System.out.println("enter username:");
-                    String username = scan.nextLine();
+                        System.out.println("enter username:");
+                        String username = scan.nextLine();
 
-                    System.out.println("enter password:");
-                    String password = scan.nextLine();
+                        System.out.println("enter password:");
+                        String password = scan.nextLine();
 
-                    ArrayList<String> usersData = new ArrayList<>();
-                    ArrayList<String> filmData = io.readData("data/login.csv");
+                        ArrayList<String> users = new ArrayList<>();
+
+                        try {
+                            ArrayList<String> usersData = io.readData("data/login.csv");
+                            if (!usersData.isEmpty()) {
+                                for (String s : usersData) {
+                                    String[] data = s.split(";");
+                                    String storedUsername = data[0];
+                                    String storedPassword = data[1];
+                                if (storedUsername.equals(username) && storedPassword.equals(password)) {
+                                    System.out.println("User logged in");
+                                    login = false;
 
 
+                                } else if (!storedUsername.equals(username) && !storedPassword.equals(password)) {
+                                    System.out.println("Wrong username or password. Try again.");
+                                    login = true;
 
-                    for (String s : usersData) {
-                        String[] data = s.split(";");
-                        String storedUsername = data[0];
-                        String storedPassword = data[1];
+                                }
 
-                        if (storedUsername.equals(username) && storedPassword.equals(password)) {
-                            System.out.println("User logged in");
-                            login = false;
-
-
-                        } else if (!storedUsername.equals(username) && !storedPassword.equals(password)) {
-                            System.out.println("Wrong username or password. Try again.");
-                            login = true;
-
+                        }  } } catch (NoSuchElementException e) {
+                            System.out.println("No users found. Please sign up first.");
+                            choice = "2";
                         }
-                    }
+
+
+
+
+                            }
+
+
                     break;
 
-                case 2:
+                case "2":
 
                     System.out.println("Sign up");
 
@@ -70,13 +79,13 @@ public class StartMenu {
                     } catch (IOException e) {
                         System.out.println(e.getMessage());
                     }
-                    login = false;
+
                     break;
 
 
             }
 
-        }
+
 
         return "";
     }
