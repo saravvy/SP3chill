@@ -6,33 +6,43 @@ import java.util.Scanner;
 public class HoveMenu {
 
 
-    public static void displayMainMenu(FileIO io) {
-        Scanner input = new Scanner(System.in);
+    public void displayMainMenu() {
 
         System.out.println("                Main Menu         ");
         System.out.println("Choose an option:");
         System.out.println("1. Show all movies");
-        System.out.println("2. Search a movie");
+        System.out.println("2. Search for a movie");
 
-        String choice = input.nextLine();
+    }
 
-        switch (choice) {
-            case "1":
+        public void switchChoice(FileIO io) {
+            Scanner input = new Scanner(System.in);
 
-                FilmList filmList = new FilmList();
-                filmList.addFilm(io);
+            String choice = input.nextLine();
 
-                ArrayList<Film> films = filmList.getFilms();
-                for (Film film : films) {
-                    System.out.println(film);
-                }
+            switch (choice) {
+                case "1":
 
-                break;
+                    FilmList filmList = new FilmList();
+                    filmList.addFilm(io);
+
+                    ArrayList<Film> films = filmList.getFilms();
+                    for (Film film : films) {
+                        System.out.println(film);
+                    }
+
+                    System.out.println("Which movie do you wanna watch?");
+                    Scanner scan = new Scanner(System.in);
+                    String choicedMovie = scan.nextLine();
 
 
-            case "2":
+
+                    break;
 
 
+                case "2":
+
+
+            }
         }
     }
-}
