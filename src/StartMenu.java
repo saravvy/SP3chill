@@ -89,14 +89,12 @@ public class StartMenu {
                     System.out.println("User logged in");
                     break;
 
-                } else if (!storedUsername.equals(username) && !storedPassword.equals(password)) {
+                } else {
                     System.out.println("Wrong username or password. Try again.");
                     showChoices();
                     switchChoices(io);
                     break;
 
-                } else {
-                    System.out.println("hej");
                 }
             }
         }
