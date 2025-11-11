@@ -11,11 +11,15 @@ public class Main {
         HoveMenu HoveMenu   = new HoveMenu();
         StartMenu StartMenu = new StartMenu();
 
-    StartMenu.showChoices();
-    StartMenu.switchChoices(io);
-    HoveMenu.displayMainMenu();
-    HoveMenu.switchChoice(io);
+        boolean done = false;
 
+        while (!done) {
+            StartMenu.showChoices();
+            StartMenu.switchChoices(io);
+            HoveMenu.menuText();
+            HoveMenu.displayMainMenu(io);
+
+        }
 
 
 
