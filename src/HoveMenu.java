@@ -3,6 +3,8 @@ import utils.FileIO;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 public class HoveMenu {
 
 
@@ -15,34 +17,53 @@ public class HoveMenu {
 
     }
 
-        public void switchChoice(FileIO io) {
-            Scanner input = new Scanner(System.in);
+    public void switchChoice(FileIO io) {
+        Scanner input = new Scanner(System.in);
 
-            String choice = input.nextLine();
+        String choice = input.nextLine();
 
-            switch (choice) {
-                case "1":
+        boolean found = false;
+        switch (choice) {
+            case "1":
+                FilmList filmList = new FilmList();
+                filmList.addFilm(io);
 
-                    FilmList filmList = new FilmList();
-                    filmList.addFilm(io);
+                ArrayList<Film> films = filmList.getFilms();
+                for (Film film : films) {
+                    System.out.println(film);
+                }
+                while (found == false) {
 
-                    ArrayList<Film> films = filmList.getFilms();
-                    for (Film film : films) {
-                        System.out.println(film);
-                    }
+
 
                     System.out.println("Which movie do you wanna watch?");
                     Scanner scan = new Scanner(System.in);
-                    String choicedMovie = scan.nextLine();
+                    String choicedMovie = scan.nextLine().toLowerCase();
 
 
+                    for (Film b : films) {
+                        if (b.getName().toLowerCase().trim().equals(choicedMovie.trim())) {
+                            //films.add(b);
 
-                    break;
+                            System.out.println(b);
+                            System.out.println("Playing movie.....");
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        System.out.println("Film not found. Try again");
 
+                    }
+                }
+                break;
 
-                case "2":
+            case "2":
+                break;
 
+            default:
 
-            }
         }
     }
+}
+

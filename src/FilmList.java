@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class FilmList {
-    private ArrayList<Film> film = new ArrayList<>();
+   public ArrayList<Film> film = new ArrayList<>();
 
     public void addFilm(FileIO io) {
 

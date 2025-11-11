@@ -40,10 +40,12 @@ public class StartMenu {
 
                         if (storedUsername.equals(username) && storedPassword.equals(password)) {
                             System.out.println("User logged in");
+                            break;
 
                         } else if (!storedUsername.equals(username) && !storedPassword.equals(password)) {
                             System.out.println("Wrong username or password. Try again.");
                             caseTwo(io);
+                            break;
 
                         } else {
                             System.out.println("hej");
@@ -59,6 +61,7 @@ public class StartMenu {
                 System.out.println("Fail");
                 showChoices();
                 switchChoices(io);
+                break;
 
         }
 
@@ -82,5 +85,6 @@ public class StartMenu {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
     }
 }
