@@ -14,7 +14,7 @@ public class Main {
     StartMenu.showChoices();
     StartMenu.switchChoices(io);
     HoveMenu.displayMainMenu();
-        HoveMenu.switchChoice(io);
+    HoveMenu.switchChoice(io);
 
 
 
