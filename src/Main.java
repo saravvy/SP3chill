@@ -13,12 +13,13 @@ public class Main {
 
         boolean done = false;
 
+        StartMenu.showChoices();
         while (!done) {
-            StartMenu.showChoices();
+
             StartMenu.switchChoices(io);
             HoveMenu.menuText();
             HoveMenu.displayMainMenu(io);
-
+            StartMenu.showChoices();
         }
 
 

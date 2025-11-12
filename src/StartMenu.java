@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class StartMenu {
 
-
+    public ArrayList<User> users = new ArrayList<>();
 
     public void showChoices() {
         System.out.println("Chose from below:");
@@ -24,14 +24,14 @@ public class StartMenu {
         switch (choice) {
 
             case "1":
-                caseOne(io,scan);
+                caseOne(io, scan);
                 break;
 
             case "2":
-                caseTwo(io,scan);
+                caseTwo(io, scan);
                 break;
 
-                default:
+            default:
                 System.out.println("Fail");
                 showChoices();
                 switchChoices(io);
@@ -50,8 +50,9 @@ public class StartMenu {
         System.out.println("Create password:");
         String newPassword = scan.nextLine();
 
-        try (FileWriter writer = new FileWriter("data/login.csv", true)) { // true = append
-            writer.write(newUsername + ";" + newPassword + "\n");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/login.csv", true))) {
+            writer.write(newUsername + ";" + newPassword);
+            writer.newLine();
         } catch (NoSuchElementException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
@@ -71,34 +72,51 @@ public class StartMenu {
         System.out.println("enter password:");
         String password = scan.nextLine();
 
-        ArrayList<String> users = io.readData("data/login.csv");
+
+        ArrayList<String> usersData = io.readData("data/login.csv");
+
+        if (usersData.isEmpty()) {
+            System.out.println("No users available. Sign up");
+            caseTwo(io, scan);
+        }
+
+        boolean login = false;
+        BufferedReader br = new BufferedReader(new FileReader("data/login.csv"));
+        String line;
+        try{
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(";");
+                String Storedusername = data[0].trim();
+                String Storedpassword = data[1].trim();
 
 
-            if (users.isEmpty()) {
-                System.out.println("No users available. Sign up");
-                caseTwo(io, scan); }
-
-        if (!users.isEmpty()) {
-            for (String s : users) {
-                    String[] data = s.split(";");
-                    String storedUsername = data[0];
-                    String storedPassword = data[1];
-
-
-                if (storedUsername.equals(username) && storedPassword.equals(password)) {
+                if (Storedusername.equals(username) && Storedpassword.equals(password)) {
                     System.out.println("User logged in");
-                    break;
-
-                } else {
-                    System.out.println("Wrong username or password. Try again.");
-                    showChoices();
-                    switchChoices(io);
+                    login = true;
                     break;
 
                 }
             }
+            if(!login){
+                        System.out.println("Wrong username or password. Try again.");
+                        showChoices();
+                        switchChoices(io);
+
+                    }
+
+                }
+
+            catch (FileNotFoundException e) {
+
+        }
+        catch (IOException e){
+
+
         }
 
-
+        }
     }
-}
+
+
+
+

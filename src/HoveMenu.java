@@ -104,7 +104,7 @@ public class HoveMenu {
                     System.out.println("What do you want to do now?");
                     displayMainMenu(io);
                     found = true;
-                    break;
+                        break;
                 }
             }
             if (!found) {
@@ -147,9 +147,9 @@ public class HoveMenu {
                             displayMainMenu(io);
 
                         }
-                            found = true;
+                found = true;
 
-                            break;
+
 
 
                 }
