@@ -1,5 +1,6 @@
 import utils.FileIO;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,21 +14,20 @@ public class HoveMenu {
 
     }
 
-    public void displayMainMenu(FileIO io) {
+    public void displayMainMenu(FileIO io) throws IOException {
 
 
         System.out.println("Choose an option:");
         System.out.println("1. Show all movies");
-        System.out.println("2. Search for a genre");
-        System.out.println("3. Search for a movie");
-        System.out.println("4. Log out");
+        System.out.println("2. Search for a movie by name");
+        System.out.println("3. Log out");
 
         switchChoice(io);
 
 
     }
 
-    public void switchChoice(FileIO io) {
+    public void switchChoice(FileIO io) throws IOException {
         Scanner scan = new Scanner(System.in);
         String choice = scan.nextLine();
 
@@ -38,15 +38,11 @@ public class HoveMenu {
                 break;
 
             case "2":
-                searchGenre(io, scan);
-
-                break;
-            case "3":
                 searchMovie(io, scan);
 
                 break;
 
-            case "4":
+            case "3":
                 logout(io, scan);
                 break;
 
@@ -62,7 +58,7 @@ public class HoveMenu {
     }
 
 
-    public void showAllMovies(FileIO io, Scanner scan) {
+    public void showAllMovies(FileIO io, Scanner scan) throws IOException {
 
         boolean found = false;
 
@@ -80,7 +76,7 @@ public class HoveMenu {
 
     }
 
-    public void searchMovie(FileIO io, Scanner scan) {
+    public void searchMovie(FileIO io, Scanner scan) throws IOException {
         boolean found = false;
         FilmList filmList = new FilmList();
         filmList.addFilm(io);
@@ -113,58 +109,6 @@ public class HoveMenu {
             }
         }
 
-
-    }
-
-    public void searchGenre(FileIO io, Scanner scan) {
-        boolean found = false;
-        FilmList filmList = new FilmList();
-        filmList.addFilm(io);
-        ArrayList<Film> films = filmList.getFilms();
-
-        while (!found) {
-
-            System.out.println("Which genre do you wanna watch?");
-
-            String choicedGenre = scan.nextLine().toLowerCase();
-
-            for (Film b : films) {
-                String[] genreValues = b.getGenre().split(",");
-
-                for (String genre : genreValues) {
-                    if (genre.trim().toLowerCase().equals(choicedGenre)) {
-
-                        System.out.println(b);
-                    }
-                }
-
-                        System.out.println("Chose movie");
-                        String choseMovie = scan.nextLine().toLowerCase();
-                        if (b.getName().toLowerCase().trim().equals(choseMovie.trim())) {
-                            System.out.println("Playing movie");
-                            System.out.println("Finished movie");
-                            System.out.println("What do you want to do now?");
-                            displayMainMenu(io);
-
-                        }
-                found = true;
-
-
-
-
-                }
-
-                if (!found) {
-                    System.out.println("Film with genre not found. Try again");
-                    searchGenre(io, scan);
-
-                }
-
-
-
-
-
-        }
 
     }
 
